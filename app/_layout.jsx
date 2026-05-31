@@ -1,3 +1,4 @@
+import { DataProvider } from "@/context/DataContext";
 import {
   Inter_400Regular,
   Inter_500Medium,
@@ -12,7 +13,6 @@ import { useEffect } from "react";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { KeyboardProvider } from "react-native-keyboard-controller";
 import { SafeAreaProvider } from "react-native-safe-area-context";
-import { DataProvider } from "../context/DataContext";
 
 SplashScreen.preventAutoHideAsync();
 

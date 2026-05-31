@@ -1,11 +1,8 @@
+import { useColors } from "@/hooks/useColors";
 import { Feather } from "@expo/vector-icons";
-import { BlurView } from "expo-blur";
 import { isLiquidGlassAvailable } from "expo-glass-effect";
 import { Tabs } from "expo-router";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
-import { SymbolView } from "expo-symbols";
-import { Platform, StyleSheet, useColorScheme } from "react-native";
-import { useColors } from "../../hooks/useColors";
 
 function NativeTabLayout() {
   return (
@@ -28,9 +25,6 @@ function NativeTabLayout() {
 
 function ClassicTabLayout() {
   const colors = useColors();
-  const colorScheme = useColorScheme();
-  const isDark = colorScheme === "dark";
-  const isIOS = Platform.OS === "ios";
 
   return (
     <Tabs
@@ -40,30 +34,19 @@ function ClassicTabLayout() {
         headerShown: false,
         tabBarStyle: {
           position: "absolute",
-          backgroundColor: isIOS ? "transparent" : colors.background,
+          backgroundColor: colors.background,
           borderTopWidth: 0,
           borderTopColor: colors.border,
           elevation: 0,
           ...({}),
         },
-        tabBarBackground: () =>
-          isIOS ? (
-            <BlurView
-              intensity={100}
-              tint={isDark ? "dark" : "light"}
-              style={StyleSheet.absoluteFill}
-            />
-          ) : null,
       }}
     >
       <Tabs.Screen
         name="clientes"
         options={{
           title: "Clientes",
-          tabBarIcon: ({ color }) =>
-            isIOS ? (
-              <SymbolView name="person.2" tintColor={color} size={24} />
-            ) : (
+          tabBarIcon: ({ color }) => (
               <Feather name="users" size={22} color={color} />
             ),
         }}
@@ -72,10 +55,7 @@ function ClassicTabLayout() {
         name="pedidos"
         options={{
           title: "Pedidos",
-          tabBarIcon: ({ color }) =>
-            isIOS ? (
-              <SymbolView name="bag" tintColor={color} size={24} />
-            ) : (
+          tabBarIcon: ({ color }) => (
               <Feather name="shopping-bag" size={22} color={color} />
             ),
         }}
@@ -84,10 +64,7 @@ function ClassicTabLayout() {
         name="anotacoes"
         options={{
           title: "Anotações",
-          tabBarIcon: ({ color }) =>
-            isIOS ? (
-              <SymbolView name="note.text" tintColor={color} size={24} />
-            ) : (
+          tabBarIcon: ({ color }) => (
               <Feather name="file-text" size={22} color={color} />
             ),
         }}
